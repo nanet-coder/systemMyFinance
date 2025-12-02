@@ -1,22 +1,43 @@
-import React, { useState, useEffect, useCallback, useMemo } from 'react'; 
 import { initializeApp } from 'firebase/app';
-import { 
-    getAuth, 
-    signInAnonymously, 
-    onAuthStateChanged,
-    signOut,
+import { BsTrash } from "react-icons/bs";
+import {
     createUserWithEmailAndPassword,
+    getAuth,
+    GoogleAuthProvider,
+    onAuthStateChanged,
+    signInAnonymously,
     signInWithEmailAndPassword,
-    GoogleAuthProvider, 
-    signInWithPopup 
+    signInWithPopup,
+    signOut
 } from 'firebase/auth';
-import { 
-    getFirestore, collection, query, onSnapshot, addDoc, serverTimestamp, setLogLevel,
-    doc, deleteDoc, setDoc, Timestamp
+import {
+    addDoc,
+    collection,
+    deleteDoc,
+    doc,
+    getFirestore,
+    onSnapshot,
+    query,
+    serverTimestamp,
+    setDoc, Timestamp
 } from 'firebase/firestore';
-import { 
-    LogIn, UserPlus, Home, TrendingUp, Settings, BarChart, X, AlertTriangle, Loader, CheckCircle, User, PieChart, Filter, Calendar 
-} from 'lucide-react'; 
+import {
+    AlertTriangle,
+    BarChart,
+    Calendar,
+    CheckCircle,
+    Filter,
+    Home,
+    Loader,
+    LogIn,
+    PieChart,
+    Settings,
+    TrendingUp,
+    User,
+    UserPlus,
+    X
+} from 'lucide-react';
+import React, { useCallback, useEffect, useMemo, useState } from 'react';
 
 // Set Firebase Log Level to debug for development purposes
 try {
@@ -567,7 +588,16 @@ const DashboardView = ({
         <div className="bg-white p-6 rounded-xl shadow-lg border-t-4 border-indigo-500">
              <p className="text-sm font-medium text-gray-500 mb-2">សមតុល្យបច្ចុប្បន្ន (Current Balance)</p>
             <div className="flex items-center justify-between">
-                <p className={`text-4xl font-extrabold ${currentBalance >= 0 ? 'text-green-600' : 'text-red-600'}`}>
+                <p 
+                    className={`
+                        font-extrabold 
+                        ${currentBalance >= 0 ? 'text-green-600' : 'text-red-600'}
+                        
+                        text-md             
+                        sm:text-3xl          
+                        md:text-3xl
+                    `}
+                >
                     {formatCurrency(currentBalance)}
                 </p>
                 <button 
@@ -584,11 +614,24 @@ const DashboardView = ({
         <div className="grid grid-cols-2 gap-4">
             <div className="bg-white p-5 rounded-xl shadow-md border-l-4 border-green-500">
                 <p className="text-sm font-medium text-gray-500">ចំណូលសរុប (Total Income)</p>
-                <p className="text-2xl font-bold text-green-500">{formatCurrency(totalIncome)}</p>
+                <p className="text-md             
+                        sm:text-2xl          
+                        md:text-2xl font-bold text-green-500">{formatCurrency(totalIncome)}</p>
             </div>
             <div className="bg-white p-5 rounded-xl shadow-md border-l-4 border-red-500">
                 <p className="text-sm font-medium text-gray-500">ចំណាយសរុប (Total Expense)</p>
-                <p className="text-2xl font-bold text-red-500">{formatCurrency(totalExpense)}</p>
+                <p 
+                    className="
+                        font-bold 
+                        text-red-500
+                        
+                        text-md             
+                        sm:text-2xl          
+                        md:text-2xl
+                    "
+                >
+                    {formatCurrency(totalExpense)}
+                </p>
             </div>
         </div>
         
@@ -692,12 +735,18 @@ const DashboardView = ({
                                 </div>
                                 
                                 {/* Delete Button */}
-                                <button
+                               <button
                                     onClick={() => handleDeleteTransaction(t.id)}
-                                    className="text-gray-400 hover:text-red-500 opacity-0 group-hover:opacity-100 transition duration-150 p-1"
+                                    className="
+                                        text-red-600 hover:text-red-500 p-1 transition duration-150
+                                        
+                                        opacity-100                  
+                                        md:opacity-0                 
+                                        md:group-hover:opacity-100   
+                                    "
                                     title="លុបប្រតិបត្តិការ"
                                 >
-                                    <X className="w-4 h-4" />
+                                    <BsTrash className="w-4 h-4" /> 
                                 </button>
                             </div>
                         </li>
